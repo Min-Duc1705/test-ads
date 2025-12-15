@@ -1,0 +1,40 @@
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: magic-english-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "magicenglish"
+    ports:
+      - "3307:3306" # Expose on 3307 to avoid conflict with local MySQL if running
+    volumes:
+      # Persist data
+      - db_data:/var/lib/mysql
+      # Initialize database with existing SQL files (executed in alphabetical order)
+      - ./database_schema.sql:/docker-entrypoint-initdb.d/01_database_schema.sql
+      - ./database_ielts_schema.sql:/docker-entrypoint-initdb.d/02_database_ielts_schema.sql
+      - ./database_toeic_schema.sql:/docker-entrypoint-initdb.d/03_database_toeic_schema.sql
+      - ./fix_audio_url_column.sql:/docker-entrypoint-initdb.d/04_fix_audio_url_column.sql
+
+  app:
+    build: .
+    container_name: magic-english-api
+    restart: always
+    depends_on:
+      - mysqldb
+    ports:
+      - "8080:8080"
+    environment:
+      # Connect to the mysqldb container service
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/magicenglish?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: "123456"
+      # Override upload path to use internal container path
+      MAGIC_ENGLISH_UPLOAD: file:///app/public/
+    volumes:
+      # Map host public folder to container public folder to persist uploads
+      - ./public:/app/public
+
+volumes:
+  db_data:

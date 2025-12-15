@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: magic-english
+  datasource:
+    url: jdbc:mysql://localhost:3306/magicenglish?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # HikariCP connection pool optimization
+    hikari:
+      maximum-pool-size: 20 # Max connections (default 10)
+      minimum-idle: 5 # Min idle connections
+      connection-timeout: 30000 # 30 seconds
+      idle-timeout: 600000 # 10 minutes
+      max-lifetime: 1800000 # 30 minutes
+      connection-test-query: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        # Performance optimizations
+        jdbc:
+          batch_size: 20 # Batch insert/update
+          fetch_size: 50 # Fetch size for queries
+        order_inserts: true
+        order_updates: true
+        # Second level cache (optional, use with caution)
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  ai:
+    openai:
+      api-key: AIzaSyAFZh2mYw_7sHZpnTcZj2UY5lxh1gI-nIk
+      chat:
+        base-url: https://generativelanguage.googleapis.com/
+        completions-path: v1beta/openai/chat/completions
+        options:
+          model: gemini-2.5-flash-lite
+          temperature: 0.7
+      # Increase timeout for large test generation
+      client:
+        connection-timeout: 120000 # 120 seconds (2 minutes)
+        read-timeout: 180000 # 180 seconds (3 minutes)
+  servlet.multipart.max-file-size: 50MB
+  servlet.multipart.max-request-size: 50MB
+
+# VoiceRSS Text-to-Speech API configuration
+voicerss:
+  api-key: e34b48fae58644daba1ed12a97814e61
+  # Get free API key at: http://www.voicerss.org/registration.aspx
+  # Free tier: 350 requests/day, unlimited text length
+
+magic_english:
+  jwt:
+    base64-secret: TRrx3ZoD9xgevlM73MU8/ay9VO+8RJ7NjvFh5Ab0xoTsKzuPYwCOKDZugGYsVxroYRfP94DH6jBxBhFyBPaQQQ==
+    access-token-validity-in-seconds: 36000 # 1 hour
+    refresh-token-validity-in-seconds: 2592000 # 30 days
+  upload: file:///T:/TryHard_IT_Project/Moblie/BTL/Backend/magic-english/public/
+  ai:
+    api-keys:
+      - AIzaSyAFZh2mYw_7sHZpnTcZj2UY5lxh1gI-nIk # Key 1
+      - AIzaSyBOVrxF_aJrrwDteDAs5yfpitVfoIQEUUQ
+      - AIzaSyDignaZ7Rs3D2EvbeEJLY1GT86xi0YfX_I
+      - AIzaSyAsx30TVSF9r9kWmB_BQT0fSVb8MQm69-4
+      - AIzaSyDviiLvP5b1yVN2pmxV60gfcsG7nAEPnZA
+
+server:
+  port: 8080
