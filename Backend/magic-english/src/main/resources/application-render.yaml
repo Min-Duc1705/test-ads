@@ -1,8 +1,10 @@
-# Configuration for Render.com deployment (PostgreSQL)
+# Configuration for Render.com deployment (MySQL)
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT:3306}/${MYSQL_DATABASE}?useSSL=true&requireSSL=true&verifyServerCertificate=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&connectTimeout=30000&socketTimeout=60000
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 5
       minimum-idle: 2
@@ -10,7 +12,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: false
   servlet:
     multipart:
