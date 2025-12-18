@@ -1,0 +1,61 @@
+# Configuration for Render.com deployment (PostgreSQL)
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  ai:
+    openai:
+      api-key: ${GEMINI_API_KEY}
+      chat:
+        base-url: https://generativelanguage.googleapis.com/
+        completions-path: v1beta/openai/chat/completions
+        options:
+          model: gemini-2.5-flash-lite
+          temperature: 0.7
+        client:
+          connection-timeout: 120000
+          read-timeout: 180000
+
+voicerss:
+  api-key: ${VOICERSS_API_KEY}
+
+magic-english:
+  jwt:
+    base64-secret: ${JWT_SECRET}
+    access-token-validity-in-seconds: 36000
+    refresh-token-validity-in-seconds: 2592000
+  upload: ${UPLOAD_PATH:file:///app/public/}
+  ai:
+    api-keys:
+      - ${AI_KEY_1:dummy}
+      - ${AI_KEY_2:dummy}
+      - ${AI_KEY_3:dummy}
+      - ${AI_KEY_4:dummy}
+      - ${AI_KEY_5:dummy}
+      - ${AI_KEY_6:dummy}
+      - ${AI_KEY_7:dummy}
+      - ${AI_KEY_8:dummy}
+      - ${AI_KEY_9:dummy}
+      - ${AI_KEY_10:dummy}
+
+# Cloudinary configuration for image storage
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+server:
+  port: ${PORT:8080}
