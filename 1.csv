@@ -1,0 +1,9 @@
+id,created_at,description,icon_url,metric_type,required_value,title,updated_at
+2,"2025-12-01 02:17:28.296833",Streak,https://res.cloudinary.com/dekprzmna/image/upload/v1765509810/10daystreak_anajda.png,learning_streak,10,"10 Day",NULL
+3,"2025-12-01 02:23:14.704063",Words,https://res.cloudinary.com/dekprzmna/image/upload/v1765509811/10words_abcsfg.png,vocab_added,10,"10 Learning",NULL
+4,"2025-12-01 14:09:41.535618",Words,https://res.cloudinary.com/dekprzmna/image/upload/v1765509813/30words_sibonq.png,vocab_added,30,"30 Learning",NULL
+5,"2025-12-01 14:10:06.119906",Words,https://res.cloudinary.com/dekprzmna/image/upload/v1765509814/40words_rgpdue.png,vocab_added,40,"40 Learning",NULL
+6,"2025-12-01 14:10:18.023038",Words,https://res.cloudinary.com/dekprzmna/image/upload/v1765509816/50words_wqzkah.png,vocab_added,50,"50 Learning",NULL
+7,"2025-12-01 14:11:47.027313",Checks,https://res.cloudinary.com/dekprzmna/image/upload/v1765509809/10checks_entq4g.png,grammar_check,10,"10 Grammar",NULL
+8,"2025-12-01 14:12:35.139384",Checks,https://res.cloudinary.com/dekprzmna/image/upload/v1765509811/30checks_soeozv.png,grammar_check,30,"30 Grammar",NULL
+9,"2025-12-01 14:12:44.096553",Checks,https://res.cloudinary.com/dekprzmna/image/upload/v1765509815/50checks_dkducd.png,grammar_check,50,"50 Grammar",NULL

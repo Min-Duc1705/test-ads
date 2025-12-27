@@ -38,6 +38,12 @@ public class TOEICQuestion {
     @Column(name = "audio_url", columnDefinition = "TEXT")
     private String audioUrl; // For Listening questions
 
+    @Column(length = 20)
+    private String part; // Part 1, Part 2, Part 3, Part 4 for Listening
+
+    @Column(name = "image_url", columnDefinition = "TEXT")
+    private String imageUrl; // For Part 1 Photographs - AI generated image URL
+    
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TOEICAnswer> answers = new ArrayList<>();
 
